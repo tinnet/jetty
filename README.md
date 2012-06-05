@@ -48,6 +48,14 @@ To establish a password, set a default attribute like so:
     }
   },
 
+## eclipse.rb
+
+This recipe installs current jetty packages directly from eclipse.org. Init
+scripts from the package are copied to appropiate places and used.
+
+Defaults to Jetty8, because JDK 7 is needed for Jetty 9. See the
+[Java cookbook](https://github.com/opscode-cookbooks/java) on how to enable JDK7.
+
 Usage
 =====
 

@@ -15,3 +15,4 @@ end
 end
 
 recipe "jetty::default", "Installs and configures Jetty"
+recipe "jetty::eclipse", "Installs and configures Jetty (eclipse distribution)"
