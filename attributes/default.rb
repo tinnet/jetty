@@ -22,7 +22,7 @@ default["jetty"]["no_start"] = 0
 default["jetty"]["jetty_args"] = ""
 default["jetty"]["java_options"] = "-Xmx256m -Djava.awt.headless=true"
 # only relevant for the hightide and eclipse recipes:
-default["jetty"]["version"] = "8.1.4.v20120524"
+default["jetty"]["version"] = "8.1.7.v20120910"
 
 case platform
 when "centos","redhat","fedora"
