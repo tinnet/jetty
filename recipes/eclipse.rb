@@ -29,7 +29,7 @@ remote_file jetty_tar_gz do
 end
 
 execute "untar jetty" do
-  command "tar -xzf #{jetty_tar_gz}.tar.gz -C /opt"
+  command "tar -xzf #{jetty_tar_gz} -C /opt"
   creates "/opt/jetty-distribution-#{node["jetty"]["eclipse"]["version"]}"
   action :run
 end
