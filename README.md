@@ -51,8 +51,8 @@ To establish a password, set a default attribute like so:
 This recipe installs current jetty packages directly from eclipse.org. Init
 scripts from the package are copied to appropiate places and used.
 
-You need JDK 7 for Jetty 9. See the [Java cookbook](https://github.com/opscode-cookbooks/java)
-on how to enable that.
+Defaults to Jetty8, because JDK 7 is needed for Jetty 9. See the
+[Java cookbook](https://github.com/opscode-cookbooks/java) on how to enable JDK7.
 
 ## hightide.rb
 
