@@ -35,7 +35,7 @@ execute "untar jetty" do
 end
 
 execute "link jetty-distribution-#{node["jetty"]["eclipse"]["version"]} to /opt/jetty" do
-  command "ln -fs /opt/jetty-distribution-#{node["jetty"]["eclipse"]["version"]} /opt/jetty"
+  command "ln --force --symbolic --no-target-directory /opt/jetty-distribution-#{node["jetty"]["eclipse"]["version"]} /opt/jetty"
   action :run
 end
 
