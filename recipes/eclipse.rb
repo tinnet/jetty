@@ -58,6 +58,10 @@ directory node["jetty"]["log_dir"] do
   action :create
 end
 
+execute "fixup /opt/jetty owner" do
+  command "chown -HRf jetty /opt/jetty"
+end
+
 service "jetty" do
   case node["platform"]
   when "centos","redhat","fedora"
