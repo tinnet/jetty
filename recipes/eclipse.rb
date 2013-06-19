@@ -18,24 +18,24 @@
 
 include_recipe "java"
 
-jetty_tar_gz = File.join(Chef::Config[:file_cache_path], "/", "jetty-distribution-#{node[:jetty][:version]}.tar.gz")
+jetty_tar_gz = File.join(Chef::Config[:file_cache_path], "/", "jetty-distribution-#{node["jetty"]["eclipse"]["version"]}.tar.gz")
 
 eclipse_mirror = node["jetty"]["eclipse"]["mirror"]
 
-remote_file "#{Chef::Config[:file_cache_path]}/jetty-distribution-#{node[:jetty][:version]}.tar.gz" do
-  source "#{eclipse_mirror}/jetty/#{node[:jetty][:version]}/dist/jetty-distribution-#{node[:jetty][:version]}.tar.gz"
+remote_file jetty_tar_gz do
+  source "#{eclipse_mirror}/jetty/#{node["jetty"]["eclipse"]["version"]}/dist/jetty-distribution-#{node["jetty"]["eclipse"]["version"]}.tar.gz"
   mode "0644"
   action :create_if_missing 
 end
 
 execute "untar jetty" do
-  command "tar -xzf #{Chef::Config[:file_cache_path]}/jetty-distribution-#{node[:jetty][:version]}.tar.gz -C /opt"
-  creates "/opt/jetty-distribution-#{node[:jetty][:version]}"
+  command "tar -xzf #{jetty_tar_gz}.tar.gz -C /opt"
+  creates "/opt/jetty-distribution-#{node["jetty"]["eclipse"]["version"]}"
   action :run
 end
 
-execute "link jetty-distribution-#{node[:jetty][:version]} to /opt/jetty" do
-  command "ln -fs /opt/jetty-distribution-#{node[:jetty][:version]} /opt/jetty"
+execute "link jetty-distribution-#{node["jetty"]["eclipse"]["version"]} to /opt/jetty" do
+  command "ln -fs /opt/jetty-distribution-#{node["jetty"]["eclipse"]["version"]} /opt/jetty"
   action :run
 end
 
@@ -51,7 +51,7 @@ user "jetty" do
    shell "/bin/false"
 end
 
-directory node[:jetty][:log_dir] do
+directory node["jetty"]["log_dir"] do
   owner "jetty"
   group "jetty"
   mode "0755"
@@ -75,5 +75,5 @@ template "/etc/default/jetty" do
   owner "root"
   group "root"
   mode "0644"
-  notifies :restart, resources(:service => "jetty")
+  notifies :restart, "service[jetty]"
 end

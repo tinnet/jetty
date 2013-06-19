@@ -27,10 +27,10 @@ package_format = value_for_platform(
   }
 )
 
-jetty_package = File.join(Chef::Config[:file_cache_path], "/", "jetty-#{package_format}-#{node[:jetty][:version]}.#{package_format}")
+jetty_package = File.join(Chef::Config[:file_cache_path], "/", "jetty-#{package_format}-#{node["jetty"]["hightide"]["version"]}.#{package_format}")
 
 remote_file jetty_package do
-  source "http://dist.codehaus.org/jetty/#{package_format}/#{node[:jetty][:version]}/jetty-#{package_format}-#{node[:jetty][:version]}.#{package_format}"
+  source "http://dist.codehaus.org/jetty/#{package_format}/#{node["jetty"]["hightide"]["version"]}/jetty-#{package_format}-#{node["jetty"]["hightide"]["version"]}.#{package_format}"
   action :create_if_missing
 end
 
@@ -45,7 +45,7 @@ user "jetty" do
    shell "/bin/false"
 end
 
-directory node[:jetty][:log_dir] do
+directory node["jetty"]["log_dir"] do
   owner "jetty"
   group "jetty"
   mode "0755"
@@ -69,5 +69,5 @@ template "/etc/default/jetty" do
   owner "root"
   group "root"
   mode "0644"
-  notifies :restart, resources(:service => "jetty")
+  notifies :restart, "service[jetty]"
 end
