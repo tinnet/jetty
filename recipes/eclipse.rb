@@ -20,10 +20,7 @@ include_recipe "java"
 
 jetty_tar_gz = File.join(Chef::Config[:file_cache_path], "/", "jetty-distribution-#{node[:jetty][:version]}.tar.gz")
 
-
-#eclipse_mirror = "http://download.eclipse.org"
-eclipse_mirror = "http://ftp.halifax.rwth-aachen.de/eclipse"
-
+eclipse_mirror = node["jetty"]["eclipse"]["mirror"]
 
 remote_file "#{Chef::Config[:file_cache_path]}/jetty-distribution-#{node[:jetty][:version]}.tar.gz" do
   source "#{eclipse_mirror}/jetty/#{node[:jetty][:version]}/dist/jetty-distribution-#{node[:jetty][:version]}.tar.gz"
